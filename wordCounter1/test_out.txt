@@ -1,0 +1,21 @@
+
+Total number of words 5
+
+Number of unique words 5
+
+Number of words that only occur once 5
+
+Number of words that only occur between 2 and 5 times 0
+
+Number of words that only occur between 6 and 15 times 0
+
+Number of words that only occur between 16 and 50 times 0
+
+Number of words that only occur between 51 and 200 times 0
+
+Number of words that only occur more than 200 times 0
+escrito	1
+si	1
+válame	1
+yo	1
+«y	1
