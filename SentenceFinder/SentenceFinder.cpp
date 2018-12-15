@@ -17,9 +17,8 @@ int main() {
 	string str, inFileName, outFileName,root;
 	unsigned int countSentencesSp = 0;
 	unsigned int countSentencesEn = 0;
-
 	
-	root = "../wordCounter1/principito";
+	root = "../media/principito/principito";
 	inFileName = root + ".txt";
 	outFileName = root + "Sent.txt";
 
@@ -48,7 +47,7 @@ int main() {
 			if (str[str.length() - 1] == 45) {
 				stringLast = str;
 				isHyphen = true;
-				continue;
+				continue;	//Go back to the top of the loop.
 			}
 			sentence += (str+" ");
 
@@ -67,10 +66,10 @@ int main() {
 	inSp.close();
 
 	//Repeat for the english version
-	root = "../wordCounter1/theLittlePrince";
+	root = "../media/principito/theLittlePrince";
 	inFileName = root + ".txt";
 	outFileName = root + "Sent.txt";
-	vector<string> mEn;	//Put the sentences in a hash table and write them out when you are done.
+	vector<string> mEn;	//Put the sentences in a string vector and write them out when you are done.
 	ifstream inEn(inFileName);
 
 
@@ -112,15 +111,36 @@ int main() {
 	cout << "\n Found " << countSentencesSp << " sentences in Spanish and " <<countSentencesEn<<" in English"<< endl;
 
 	ofstream out(outFileName);
-	int tempSize = mSp.size();
+	size_t tempSize = mSp.size();
+	bool spanishSmaller = true;
+	if (mEn.size() <= mSp.size()) {
+		tempSize = mEn.size();
+		spanishSmaller = false;
+	}
 	if (out.is_open()) {
-		if (countSentencesEn >= countSentencesSp) {
-			tempSize = mEn.size();
-		}
+
 		for (int iCnt = 0; iCnt < tempSize; iCnt++) {
 			out << mSp[iCnt] << endl;
 			out << mEn[iCnt] << endl;
 			out << "\n";
+		}
+
+// So, you have some number of either spanish or english sentences left over. Go ahead and print them at the end.
+
+		if (spanishSmaller) {
+			out << "\n\nExtra english sentences\n" << endl;
+			for (size_t iCnt = mSp.size(); iCnt < mEn.size(); iCnt++) {
+				out << mEn[iCnt] << endl;
+				out << "\n";
+			}
+		}
+		else
+		{
+			out << "\n\nExtra spanish sentences\n" << endl;
+			for (size_t iCnt = mEn.size(); iCnt < mSp.size(); iCnt++) {
+				out << mSp[iCnt] << endl;
+				out << "\n";
+			}
 		}
 	}
 	else
@@ -128,6 +148,4 @@ int main() {
 		cerr << "\nError opening output file: " << outFileName << endl;
 	}
 	out.close();
-
-	
 }
