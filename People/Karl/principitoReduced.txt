@@ -1,7 +1,6 @@
 
-Input files ../media/principito/principito.txt and ../People/Karl/myWords.txt
-
 Total number of words 2503
+
 Number of unique words 1657
 Number of words that only occur once 1229
 Number of words that only occur between 2 and 5 times 400
